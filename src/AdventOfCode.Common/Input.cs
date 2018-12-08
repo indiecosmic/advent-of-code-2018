@@ -7,11 +7,16 @@ namespace AdventOfCode.Common
     {
         public static string[] ReadRows()
         {
+            return ReadInput().Split("\n", StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        public static string ReadInput()
+        {
             const string filename = "input.txt";
             using (var reader = new StreamReader(filename))
             {
                 var input = reader.ReadToEnd();
-                return input.Split("\n", StringSplitOptions.RemoveEmptyEntries);
+                return input.Trim();
             }
         }
     }
