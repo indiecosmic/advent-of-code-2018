@@ -26,7 +26,7 @@ namespace Day09
             Console.ReadLine();
         }
 
-        private static int CalculateHighScore(int numberOfPlayers, int lastMarbleWorth, int multiplier = 1)
+        private static long CalculateHighScore(int numberOfPlayers, int lastMarbleWorth, int multiplier = 1)
         {
             var rounds = lastMarbleWorth * multiplier;
 

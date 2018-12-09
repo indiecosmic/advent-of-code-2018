@@ -6,7 +6,7 @@ namespace Day09
 {
     class Player
     {
-        public int Score { get; set; }
+        public long Score { get; set; }
         public Player()
         {
             

@@ -1,48 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Day09
 {
     class MarbleGame
     {
-        private readonly List<int> _marbles = new List<int>();
-        //private readonly LinkedList<int> _marbles2 = new LinkedList<int>();
-        //private LinkedListNode<int> _currentNode;
-        private int _current;
+        private readonly LinkedList<int> _marbles = new LinkedList<int>();
+        private LinkedListNode<int> _currentNode;
 
         public MarbleGame()
         {
-            _marbles.Add(0);
-            //_currentNode = _marbles2.AddFirst(0);
-            _current = 0;
+            _currentNode = _marbles.AddFirst(0);
         }
 
         public void PlaceMarble(Player player, int number)
         {
-            var length = _marbles.Count;
-            var current = _current;
-
             if (number % 23 == 0)
             {
-                current -= 7;
-                if (current < 0)
-                    current += length;
-
+                for (var i = 0; i < 7; i++)
+                {
+                    _currentNode = _currentNode.Previous ?? _marbles.Last;
+                }
                 player.Score += number;
-                player.Score += _marbles[current];
-
-                _marbles.RemoveAt(current);
-                _current = current;
+                player.Score += _currentNode.Value;
+                var remove = _currentNode;
+                _currentNode = _currentNode.Next ?? _marbles.First;
+                _marbles.Remove(remove);
                 return;
             }
-
-            current += 2;
-            if (current > length)
-                current -= length;
-
-            _marbles.Insert(current, number);
-            _current = current;
+            _currentNode = _currentNode.Next ?? _marbles.First;
+            var newValue = new LinkedListNode<int>(number);
+            _marbles.AddAfter(_currentNode, newValue);
+            _currentNode = newValue;
         }
     }
 }
