@@ -5,18 +5,18 @@ namespace AdventOfCode.Common
 {
     public static class Input
     {
-        public static string[] ReadRows()
+        public static string[] ReadRows(bool trim = true)
         {
-            return ReadInput().Split("\n", StringSplitOptions.RemoveEmptyEntries);
+            return ReadInput(trim).Split("\n", StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public static string ReadInput()
+        public static string ReadInput(bool trim = true)
         {
             const string filename = "input.txt";
             using (var reader = new StreamReader(filename))
             {
                 var input = reader.ReadToEnd();
-                return input.Trim();
+                return trim ? input.Trim() : input;
             }
         }
     }
