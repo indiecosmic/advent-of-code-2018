@@ -7,7 +7,7 @@ namespace AdventOfCode.Common
     {
         public static string[] ReadRows(bool trim = true)
         {
-            return ReadInput(trim).Split("\n", StringSplitOptions.RemoveEmptyEntries);
+            return ReadInput(trim).Split(new []{'\n','\r'}, StringSplitOptions.RemoveEmptyEntries);
         }
 
         public static string ReadInput(bool trim = true)
