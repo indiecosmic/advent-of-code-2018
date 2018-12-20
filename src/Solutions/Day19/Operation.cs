@@ -4,18 +4,18 @@ namespace Day19
 {
     class Operation
     {
-        private readonly Func<int[], int[], int[]> _func;
+        private readonly Action<int[], int[]> _action;
         public readonly string Name;
 
-        public Operation(Func<int[], int[], int[]> func)
+        private Operation(Action<int[], int[]> action)
         {
-            _func = func;
-            Name = func.Method.Name;
+            _action = action;
+            Name = action.Method.Name;
         }
 
-        public int[] Invoke(int[] register, int[] instruction)
+        public void Invoke(int[] register, int[] instruction)
         {
-            return _func.Invoke(register, instruction);
+            _action.Invoke(register, instruction);
         }
 
         public override string ToString()
@@ -42,157 +42,126 @@ namespace Day19
 
         private static class Operations
         {
-            public static int[] Addr(int[] register, int[] instruction)
+            public static void Addr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] + register[registerB];
-                return output;
+                register[registerC] = register[registerA] + register[registerB];
             }
 
-            public static int[] Addi(int[] register, int[] instruction)
+            public static void Addi(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] + valueB;
-                return output;
+                register[registerC] = register[registerA] + valueB;
             }
 
-            public static int[] Mulr(int[] register, int[] instruction)
+            public static void Mulr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] * register[registerB];
-                return output;
+                register[registerC] = register[registerA] * register[registerB];
+
             }
-            public static int[] Muli(int[] register, int[] instruction)
+            public static void Muli(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] * valueB;
-                return output;
+                register[registerC] = register[registerA] * valueB;
             }
 
-            public static int[] Banr(int[] register, int[] instruction)
+            public static void Banr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] & register[registerB];
-                return output;
+                register[registerC] = register[registerA] & register[registerB];
             }
 
-            public static int[] Bani(int[] register, int[] instruction)
+            public static void Bani(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] & valueB;
-                return output;
+                register[registerC] = register[registerA] & valueB;
             }
 
-            public static int[] Borr(int[] register, int[] instruction)
+            public static void Borr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] | register[registerB];
-                return output;
+                register[registerC] = register[registerA] | register[registerB];
             }
 
-            public static int[] Bori(int[] register, int[] instruction)
+            public static void Bori(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] | valueB;
-                return output;
+                register[registerC] = register[registerA] | valueB;
             }
 
-            public static int[] Setr(int[] register, int[] instruction)
+            public static void Setr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA];
-                return output;
+                register[registerC] = register[registerA];
             }
 
-            public static int[] Seti(int[] register, int[] instruction)
+            public static void Seti(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var valueA = instruction[0];
                 var registerC = instruction[2];
-                output[registerC] = valueA;
-                return output;
+                register[registerC] = valueA;
             }
 
-            public static int[] Gtir(int[] register, int[] instruction)
+            public static void Gtir(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var valueA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = valueA > register[registerB] ? 1 : 0;
-                return output;
+                register[registerC] = valueA > register[registerB] ? 1 : 0;
             }
-            public static int[] Gtri(int[] register, int[] instruction)
+            public static void Gtri(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] > valueB ? 1 : 0;
-                return output;
+                register[registerC] = register[registerA] > valueB ? 1 : 0;
             }
-            public static int[] Gtrr(int[] register, int[] instruction)
+            public static void Gtrr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] > register[registerB] ? 1 : 0;
-                return output;
+                register[registerC] = register[registerA] > register[registerB] ? 1 : 0;
             }
 
-            public static int[] Eqir(int[] register, int[] instruction)
+            public static void Eqir(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var valueA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = valueA == register[registerB] ? 1 : 0;
-                return output;
+                register[registerC] = valueA == register[registerB] ? 1 : 0;
             }
-            public static int[] Eqri(int[] register, int[] instruction)
+            public static void Eqri(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var valueB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] == valueB ? 1 : 0;
-                return output;
+                register[registerC] = register[registerA] == valueB ? 1 : 0;
             }
-            public static int[] Eqrr(int[] register, int[] instruction)
+            public static void Eqrr(int[] register, int[] instruction)
             {
-                var output = (int[])register.Clone();
                 var registerA = instruction[0];
                 var registerB = instruction[1];
                 var registerC = instruction[2];
-                output[registerC] = register[registerA] == register[registerB] ? 1 : 0;
-                return output;
+                register[registerC] = register[registerA] == register[registerB] ? 1 : 0;
             }
         }
     }

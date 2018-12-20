@@ -7,7 +7,7 @@ namespace Day19
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var operations = new[]
             {
@@ -51,7 +51,7 @@ namespace Day19
             while (true)
             {
                 var instruction = instructions[instructionPointer];
-                register = operations[instruction.Name].Invoke(register, instruction.Data);
+                operations[instruction.Name].Invoke(register, instruction.Data);
                 instructionPointer = register[jumpRegister] + 1;
                 if (instructionPointer < 0 || instructionPointer >= instructions.Count)
                     break;
@@ -75,14 +75,11 @@ namespace Day19
                         register[2] = register[5];
                 }
                 var instruction = instructions[instructionPointer];
-                var result = operations[instruction.Name].Invoke(register, instruction.Data);
-                instructionPointer = result[jumpRegister];
-                instructionPointer++;
+                operations[instruction.Name].Invoke(register, instruction.Data);
+                instructionPointer = register[jumpRegister] + 1;
                 if (instructionPointer < 0 || instructionPointer >= instructions.Count)
                     break;
-                result[jumpRegister] = instructionPointer;
-                //Console.WriteLine($"[{register[0]},{register[1]},{register[2]},{register[3]},{register[4]},{register[5]}] {instruction} [{result[0]},{result[1]},{result[2]},{result[3]},{result[4]},{result[5]}]");
-                register = result;
+                register[jumpRegister] = instructionPointer;
             }
             return register[0];
         }
