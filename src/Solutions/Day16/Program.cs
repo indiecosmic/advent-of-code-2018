@@ -49,7 +49,7 @@ namespace Day16
             {
                 var opNumber = instruction[0];
                 var op = opCodesRegister[opNumber];
-                register = op.Invoke(register, instruction);
+                register = op.Invoke(register, instruction.Skip(1).ToArray());
             }
 
             return register;

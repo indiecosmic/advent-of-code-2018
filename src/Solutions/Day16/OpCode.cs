@@ -45,9 +45,9 @@ namespace Day16
             public static int[] Addr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] + register[registerB];
                 return output;
             }
@@ -55,9 +55,9 @@ namespace Day16
             public static int[] Addi(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] + valueB;
                 return output;
             }
@@ -65,18 +65,18 @@ namespace Day16
             public static int[] Mulr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] * register[registerB];
                 return output;
             }
             public static int[] Muli(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] * valueB;
                 return output;
             }
@@ -84,9 +84,9 @@ namespace Day16
             public static int[] Banr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] & register[registerB];
                 return output;
             }
@@ -94,9 +94,9 @@ namespace Day16
             public static int[] Bani(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] & valueB;
                 return output;
             }
@@ -104,9 +104,9 @@ namespace Day16
             public static int[] Borr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] | register[registerB];
                 return output;
             }
@@ -114,9 +114,9 @@ namespace Day16
             public static int[] Bori(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] | valueB;
                 return output;
             }
@@ -124,8 +124,8 @@ namespace Day16
             public static int[] Setr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA];
                 return output;
             }
@@ -133,8 +133,8 @@ namespace Day16
             public static int[] Seti(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var valueA = instruction[1];
-                var registerC = instruction[3];
+                var valueA = instruction[0];
+                var registerC = instruction[2];
                 output[registerC] = valueA;
                 return output;
             }
@@ -142,27 +142,27 @@ namespace Day16
             public static int[] Gtir(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var valueA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var valueA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = valueA > register[registerB] ? 1 : 0;
                 return output;
             }
             public static int[] Gtri(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] > valueB ? 1 : 0;
                 return output;
             }
             public static int[] Gtrr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] > register[registerB] ? 1 : 0;
                 return output;
             }
@@ -170,27 +170,27 @@ namespace Day16
             public static int[] Eqir(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var valueA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var valueA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = valueA == register[registerB] ? 1 : 0;
                 return output;
             }
             public static int[] Eqri(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var valueB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var valueB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] == valueB ? 1 : 0;
                 return output;
             }
             public static int[] Eqrr(int[] register, int[] instruction)
             {
                 var output = (int[])register.Clone();
-                var registerA = instruction[1];
-                var registerB = instruction[2];
-                var registerC = instruction[3];
+                var registerA = instruction[0];
+                var registerB = instruction[1];
+                var registerC = instruction[2];
                 output[registerC] = register[registerA] == register[registerB] ? 1 : 0;
                 return output;
             }

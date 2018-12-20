@@ -10,12 +10,12 @@ namespace Day16
         public int[] Register { get; }
         public int[] Opcode { get; }
         public int[] Expected { get; }
+        public int OpCodeNumber { get; }
 
-        public int OpCodeNumber => Opcode[0];
-
-        private Sample(int[] register, int[] opcode, int[] expected)
+        private Sample(int[] register, int opCodeNumber, int[] opcode, int[] expected)
         {
             Register = register;
+            OpCodeNumber = opCodeNumber;
             Opcode = opcode;
             Expected = expected;
         }
@@ -28,10 +28,12 @@ namespace Day16
             var expected = after.Split(new[] {"After: ", "[", "]", ", ", " "}, StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse).ToArray();
 
-            var op = opcode.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse).ToArray();
+            var opcodeParts = opcode.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            var opcodeNumber = int.Parse(opcodeParts[0]);
+                
+            var op = opcodeParts.Skip(1).Select(int.Parse).ToArray();
 
-            return new Sample(register, op, expected);
+            return new Sample(register, opcodeNumber, op, expected);
         }
     }
 }
